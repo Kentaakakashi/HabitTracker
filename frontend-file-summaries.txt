@@ -1,0 +1,7 @@
+{
+  "frontend/src/App.tsx": "Root application component that sets up TanStack Router with routes for Dashboard (/), Analytics (/analytics), HabitDetail (/habit/$id), and Settings (/settings), wrapped in ThemeProvider.",
+  "frontend/src/pages/Analytics.tsx": "Analytics page showing 30-day daily line chart, weekly averages bar chart, and goal completion stats for a selected habit using Recharts.",
+  "frontend/src/pages/Settings.tsx": "Settings page with theme picker (5 built-in themes) and a custom theme builder modal, plus an about section with attribution footer.",
+  "frontend/src/pages/HabitDetail.tsx": "Habit detail page showing today's circular progress, streak stats, and a 365-day GitHub-style heatmap calendar for a single habit.",
+  "frontend/src/components/Layout.tsx": "App shell layout wrapping all pages with the responsive Navigation sidebar/tab-bar and a Sonner toast provider."
+}

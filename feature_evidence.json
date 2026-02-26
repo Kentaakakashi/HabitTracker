@@ -1,0 +1,196 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-eight-built-in-habit-log-types-with-appropriate-default-units-icons-and-input-controls-water-ml-oz-calories-kcal-exercise-minutes-reps-weight-kg-lbs-sleep-hours-study-minutes-pills-count-checkbox-and-to-dos-task-list-with-completion-toggle-each-type-should-have-a-type-specific-input-ui",
+      "featureTitle": "Implement eight built-in habit log types with appropriate default units, icons, and input controls: Water (ml/oz), Calories (kcal), Exercise (minutes/reps), Weight (kg/lbs), Sleep (hours), Study (minutes), Pills (count/checkbox), and To-Dos (task list with completion toggle). Each type should have a type-specific input UI.",
+      "files": [
+        "frontend/src/components/HabitTypeSelector.tsx",
+        "frontend/src/components/LogEntryInput.tsx",
+        "frontend/src/types/habit.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-custom-log-builder-that-allows-users-to-define-their-own-habit-type-with-a-name-unit-label-icon-from-a-preset-icon-set-color-daily-target-value-and-input-type-numeric-boolean-or-text-custom-habits-are-stored-alongside-built-in-habits",
+      "featureTitle": "Build a custom log builder that allows users to define their own habit type with a name, unit label, icon (from a preset icon set), color, daily target value, and input type (numeric, boolean, or text). Custom habits are stored alongside built-in habits.",
+      "files": [
+        "frontend/src/components/ColorPicker.tsx",
+        "frontend/src/components/CustomHabitBuilder.tsx",
+        "frontend/src/components/IconPicker.tsx",
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-streak-tracking-for-each-habit-calculate-current-consecutive-day-streak-and-longest-ever-streak-based-on-log-entries-display-a-github-style-contribution-heatmap-calendar-365-days-for-each-habit-showing-log-frequency-and-intensity",
+      "featureTitle": "Implement streak tracking for each habit: calculate current consecutive-day streak and longest-ever streak based on log entries. Display a GitHub-style contribution heatmap calendar (365 days) for each habit showing log frequency and intensity.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/HabitCard.tsx",
+        "frontend/src/components/HeatmapCalendar.tsx",
+        "frontend/src/pages/HabitDetail.tsx",
+        "frontend/src/utils/streakCalculator.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-animated-progress-rings-circular-progress-indicators-to-each-habit-card-on-the-dashboard-showing-today-s-completion-percentage-relative-to-the-daily-target-rings-should-animate-on-load-and-on-value-update",
+      "featureTitle": "Add animated progress rings (circular progress indicators) to each habit card on the dashboard showing today's completion percentage relative to the daily target. Rings should animate on load and on value update.",
+      "files": [
+        "frontend/src/components/CircularProgress.tsx",
+        "frontend/src/components/HabitCard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-an-analytics-page-with-charts-for-each-habit-showing-a-line-bar-chart-of-daily-values-over-the-past-30-days-a-weekly-average-bar-chart-and-a-goal-completion-rate-percentage-use-a-charting-library-such-as-recharts",
+      "featureTitle": "Build an analytics page with charts for each habit showing: a line/bar chart of daily values over the past 30 days, a weekly average bar chart, and a goal completion rate percentage. Use a charting library such as Recharts.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/Analytics.tsx",
+        "frontend/src/utils/analyticsCalculator.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-full-theme-system-with-five-distinct-pre-built-visual-themes-minimal-clean-whites-soft-grays-glassmorphism-frosted-glass-cards-blur-effects-neon-dark-dark-background-vivid-neon-accents-nature-earthy-greens-and-warm-browns-and-retro-pixel-inspired-warm-yellows-and-reds-switchable-from-a-settings-panel-each-theme-defines-color-palette-border-radii-card-styles-and-typography-weight",
+      "featureTitle": "Implement a full theme system with five distinct pre-built visual themes — Minimal (clean whites, soft grays), Glassmorphism (frosted glass cards, blur effects), Neon Dark (dark background, vivid neon accents), Nature (earthy greens and warm browns), and Retro (pixel-inspired, warm yellows and reds) — switchable from a settings panel. Each theme defines color palette, border radii, card styles, and typography weight.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ThemePicker.tsx",
+        "frontend/src/context/ThemeContext.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/Settings.tsx",
+        "frontend/src/themes/themeDefinitions.ts",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-custom-theme-builder-that-lets-users-define-their-own-theme-by-choosing-primary-color-background-color-accent-color-card-style-flat-glass-shadow-and-border-radius-level-none-small-large-pill-preview-the-theme-live-before-saving",
+      "featureTitle": "Add a custom theme builder that lets users define their own theme by choosing primary color, background color, accent color, card style (flat/glass/shadow), and border radius level (none/small/large/pill). Preview the theme live before saving.",
+      "files": [
+        "frontend/src/components/CustomThemeBuilder.tsx",
+        "frontend/src/context/ThemeContext.tsx",
+        "frontend/src/pages/Settings.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-integrate-rich-animations-throughout-the-app-using-framer-motion-page-transitions-habit-card-enter-exit-animations-progress-ring-draws-log-entry-success-micro-animations-confetti-or-pulse-effect-on-hitting-a-goal-and-staggered-list-animations-for-the-habit-dashboard",
+      "featureTitle": "Integrate rich animations throughout the app using Framer Motion: page transitions, habit card enter/exit animations, progress ring draws, log entry success micro-animations (confetti or pulse effect on hitting a goal), and staggered list animations for the habit dashboard.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/CircularProgress.tsx",
+        "frontend/src/components/GoalCompletionAnimation.tsx",
+        "frontend/src/components/HabitCard.tsx",
+        "frontend/src/components/LogEntryInput.tsx",
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-design-and-enforce-a-cohesive-visual-theme-that-adapts-to-each-selected-style-while-maintaining-a-premium-modern-feel-the-default-theme-minimal-should-use-a-crisp-off-white-and-charcoal-palette-with-clean-card-layouts-generous-spacing-and-a-bold-sans-serif-typeface-navigation-should-be-a-fixed-bottom-tab-bar-on-mobile-and-a-left-sidebar-on-desktop",
+      "featureTitle": "Design and enforce a cohesive visual theme that adapts to each selected style while maintaining a premium, modern feel. The default theme (Minimal) should use a crisp off-white and charcoal palette with clean card layouts, generous spacing, and a bold sans-serif typeface. Navigation should be a fixed bottom tab bar on mobile and a left sidebar on desktop.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/components/Navigation.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/Dashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

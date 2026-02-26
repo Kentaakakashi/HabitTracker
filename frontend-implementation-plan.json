@@ -1,0 +1,331 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Universal Habit Tracker App — Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-2",
+      "summary": "Implement eight built-in habit log types with type-specific input controls and default configurations",
+      "acceptanceCriteria": [
+        "All eight built-in types are available when creating a new habit",
+        "Each type shows a contextually appropriate input control (slider, number input, checkbox, task list, etc.)",
+        "Default units and icons are pre-filled for each built-in type",
+        "Pills type supports checkbox-style completion",
+        "To-Dos type supports adding, completing, and removing individual tasks"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/types/habit.ts",
+          "operation": "create",
+          "description": "Define TypeScript interfaces for Habit, LogEntry, and built-in habit type definitions. Create a constant array of eight built-in types (Water, Calories, Exercise, Weight, Sleep, Study, Pills, To-Dos) with default unit, icon, color, target, and input control metadata."
+        },
+        {
+          "path": "frontend/src/components/HabitTypeSelector.tsx",
+          "operation": "create",
+          "description": "Create a component that displays all eight built-in habit types as selectable cards showing icon, name, and unit. Returns the selected built-in type configuration when clicked."
+        },
+        {
+          "path": "frontend/src/components/LogEntryInput.tsx",
+          "operation": "create",
+          "description": "Create a smart input component that renders the appropriate control based on habit type: numeric input with optional slider for Water/Calories/Exercise/Weight/Sleep/Study, checkbox for Pills, and a task list with add/toggle/remove for To-Dos. Use the shadcn-ui Input, Slider, Checkbox, and Button components per the selected component usage instructions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build a custom habit builder allowing users to define name, unit, icon, color, target, and input type",
+      "acceptanceCriteria": [
+        "User can open a 'Create Custom Habit' modal or page",
+        "User can set name, unit label, icon, color, target, and input type",
+        "Custom habits appear in the main habit list after creation",
+        "Custom habits can be edited and deleted"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CustomHabitBuilder.tsx",
+          "operation": "create",
+          "description": "Create a modal or form component for building custom habits. Include text inputs for name and unit, an icon picker (preset icon set), a color picker, a number input for target, and radio buttons for input type (numeric, boolean, text). Call backend createHabit when saved. Use shadcn-ui Dialog, Input, Select, and Button components per usage instructions."
+        },
+        {
+          "path": "frontend/src/components/IconPicker.tsx",
+          "operation": "create",
+          "description": "Create an icon picker component that displays a grid of preset icons (use Lucide React icons). Returns the selected icon index when clicked."
+        },
+        {
+          "path": "frontend/src/components/ColorPicker.tsx",
+          "operation": "create",
+          "description": "Create a color picker component displaying a palette of predefined theme-friendly colors (exclude blue and purple per constraints). Returns the selected color hex code."
+        },
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Add a floating action button or header button that opens the CustomHabitBuilder modal. Wire the modal to display when clicked and refresh the habit list after a custom habit is created."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement streak tracking and GitHub-style heatmap calendar for each habit",
+      "acceptanceCriteria": [
+        "Current streak and longest streak are shown on each habit card",
+        "Streaks are recalculated when new entries are logged",
+        "Heatmap renders 365 days with color intensity based on entry value relative to target",
+        "Days with no entry appear as empty/muted cells",
+        "Heatmap is accessible from each habit's detail view"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/streakCalculator.ts",
+          "operation": "create",
+          "description": "Create utility functions to calculate current streak and longest streak from an array of LogEntry objects sorted by date. A streak continues if consecutive days have entries."
+        },
+        {
+          "path": "frontend/src/components/HeatmapCalendar.tsx",
+          "operation": "create",
+          "description": "Create a heatmap calendar component rendering 365 days in a grid (52 weeks × 7 days). Fetch log entries for the habit via backend getLogEntriesForHabit and color each cell based on value relative to target. Empty days are muted. Use Tailwind for cell colors and spacing."
+        },
+        {
+          "path": "frontend/src/components/HabitCard.tsx",
+          "operation": "modify",
+          "description": "Add current streak and longest streak labels to each habit card. Fetch log entries for the habit, calculate streaks using streakCalculator, and display the values. Link to the habit detail view where the heatmap is shown."
+        },
+        {
+          "path": "frontend/src/pages/HabitDetail.tsx",
+          "operation": "create",
+          "description": "Create a detail page for a single habit showing the habit name, icon, target, current/longest streaks, and the HeatmapCalendar component. Fetch habit and log entries via backend methods."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the HabitDetail route in the React Router configuration so users can navigate to /habit/:id to view habit details."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add animated circular progress rings to habit cards showing today's completion percentage",
+      "acceptanceCriteria": [
+        "Each habit card displays a circular progress ring",
+        "Ring fill percentage reflects today's logged value vs. target",
+        "Ring animates smoothly when value changes",
+        "Ring shows 100% filled state with a distinct color when target is met",
+        "Percentage label is shown inside the ring"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CircularProgress.tsx",
+          "operation": "create",
+          "description": "Create an animated circular progress ring component using SVG circle elements and Framer Motion for smooth draw animation. Accept percentage prop and render a ring with the appropriate fill arc. Display percentage label in the center. Use distinct color when percentage >= 100."
+        },
+        {
+          "path": "frontend/src/components/HabitCard.tsx",
+          "operation": "modify",
+          "description": "Add the CircularProgress component to each habit card. Fetch today's log entry for the habit via backend getLogEntriesByHabitAndDateRange (today only), calculate percentage (todayValue / target * 100), and pass it to CircularProgress. Animate on mount and when value updates."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Build an analytics page with charts showing daily values, weekly averages, and goal completion rate",
+      "acceptanceCriteria": [
+        "Analytics page is accessible from the main navigation",
+        "User can select a habit to view its analytics",
+        "30-day daily value chart renders correctly with dates on x-axis",
+        "Weekly average chart groups data by week",
+        "Goal completion rate is displayed as a percentage stat card",
+        "Charts are responsive and readable on mobile"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Analytics.tsx",
+          "operation": "create",
+          "description": "Create an analytics page with a habit selector dropdown. Fetch log entries for the selected habit for the past 30 days via backend getLogEntriesByHabitAndDateRange. Render a line/bar chart for daily values, a bar chart for weekly averages (group entries by week), and a stat card showing goal completion rate (days met target / total days logged * 100). Use Recharts library for charts and ensure responsiveness."
+        },
+        {
+          "path": "frontend/src/utils/analyticsCalculator.ts",
+          "operation": "create",
+          "description": "Create utility functions to transform log entries into chart data: generate 30-day daily data array, calculate weekly averages by grouping entries by week, and compute goal completion rate percentage."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the Analytics route in the React Router configuration. Link the Analytics page to /analytics and add it to the main navigation (bottom tab bar on mobile, left sidebar on desktop)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Implement a theme system with five pre-built visual themes switchable from a settings panel",
+      "acceptanceCriteria": [
+        "A settings panel or theme picker allows switching between all five themes",
+        "Theme change is applied globally and immediately without page reload",
+        "Each theme has a visually distinct appearance across all components",
+        "Glassmorphism theme uses backdrop-blur and semi-transparent cards",
+        "Neon Dark theme uses dark backgrounds with glowing accent colors",
+        "Selected theme is persisted via backend and restored on next visit"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/themes/themeDefinitions.ts",
+          "operation": "create",
+          "description": "Define five built-in theme objects (Minimal, Glassmorphism, Neon Dark, Nature, Retro) each containing primaryColor, backgroundColor, accentColor, cardStyle, and borderRadius. Minimal uses off-white/charcoal, Glassmorphism uses frosted glass with blur, Neon Dark uses dark bg with neon accents, Nature uses earthy greens/browns, Retro uses warm yellows/reds. Exclude blue and purple per constraints."
+        },
+        {
+          "path": "frontend/src/context/ThemeContext.tsx",
+          "operation": "create",
+          "description": "Create a React context and provider for theme management. Fetch the saved theme from backend getTheme on mount and apply it globally by setting CSS custom properties on the document root. Expose a setTheme function that updates the theme, persists it via backend saveTheme, and re-applies CSS properties immediately."
+        },
+        {
+          "path": "frontend/src/components/ThemePicker.tsx",
+          "operation": "create",
+          "description": "Create a theme picker component displaying all five built-in themes as selectable cards with preview swatches. On selection, call setTheme from ThemeContext. Use shadcn-ui Card and Button components per usage instructions."
+        },
+        {
+          "path": "frontend/src/pages/Settings.tsx",
+          "operation": "create",
+          "description": "Create a settings page that embeds the ThemePicker component. This page is accessible from the main navigation."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap the entire app in ThemeProvider from ThemeContext. Register the Settings route in React Router at /settings and add it to the main navigation (bottom tab bar on mobile, left sidebar on desktop)."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define CSS custom properties (--primary-color, --background-color, --accent-color, --card-style, --border-radius) in the :root selector. Add utility classes for each cardStyle (flat, glass, shadow) including backdrop-blur for glass. Ensure all components reference these CSS variables for theming."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme to reference CSS custom properties for colors and border radii. Add backdrop-blur utilities for the Glassmorphism theme. Ensure responsive breakpoints for mobile and desktop navigation layouts."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add a custom theme builder with live preview and persistence",
+      "acceptanceCriteria": [
+        "Custom theme builder is accessible from the theme settings panel",
+        "User can pick colors using a color picker for primary, background, and accent",
+        "Card style and border radius options are selectable",
+        "Live preview updates the UI as options are changed",
+        "Saved custom theme appears as a selectable option alongside built-in themes"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CustomThemeBuilder.tsx",
+          "operation": "create",
+          "description": "Create a modal or form component for building custom themes. Include color pickers for primaryColor, backgroundColor, and accentColor (use ColorPicker component or native input type=color). Add radio buttons or select for cardStyle (flat/glass/shadow) and borderRadius (none/small/large/pill). As user changes options, apply them to a live preview area using CSS custom properties. On save, call backend saveTheme and add the custom theme to the theme list in ThemeContext."
+        },
+        {
+          "path": "frontend/src/pages/Settings.tsx",
+          "operation": "modify",
+          "description": "Add a button or link on the Settings page that opens the CustomThemeBuilder modal. After a custom theme is saved, refresh the ThemePicker to show the new theme as a selectable option."
+        },
+        {
+          "path": "frontend/src/context/ThemeContext.tsx",
+          "operation": "modify",
+          "description": "Extend ThemeContext to manage a list of available themes (built-in + custom). When a custom theme is saved, append it to the list and persist it via backend saveTheme. Fetch and restore custom themes on mount."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Integrate rich animations using Framer Motion for page transitions, habit cards, progress rings, and micro-animations",
+      "acceptanceCriteria": [
+        "Page/view transitions use smooth Framer Motion animations",
+        "Habit cards animate in with staggered entry on dashboard load",
+        "Progress ring fill animates on mount and on value update",
+        "A celebratory micro-animation plays when a daily goal is completed",
+        "Log entry submission has a confirmation animation",
+        "All animations respect reduced-motion preferences"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/PageTransition.tsx",
+          "operation": "create",
+          "description": "Create a page transition wrapper using Framer Motion AnimatePresence and motion.div. Apply fade-in and slide-up animations to all page-level route changes. Respect prefers-reduced-motion media query."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap all route components with the PageTransition component to enable smooth page transitions throughout the app."
+        },
+        {
+          "path": "frontend/src/components/HabitCard.tsx",
+          "operation": "modify",
+          "description": "Wrap each HabitCard in a Framer Motion motion.div with staggered entry animation (use staggerChildren in the parent container). Animate cards on mount with fade-in and slide-up effects."
+        },
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "Wrap the habit card list container with Framer Motion motion.div and apply staggerChildren animation so habit cards animate in sequentially on dashboard load."
+        },
+        {
+          "path": "frontend/src/components/CircularProgress.tsx",
+          "operation": "modify",
+          "description": "Use Framer Motion to animate the SVG circle stroke-dashoffset property so the progress ring draws smoothly on mount and when the percentage prop changes."
+        },
+        {
+          "path": "frontend/src/components/GoalCompletionAnimation.tsx",
+          "operation": "create",
+          "description": "Create a celebratory micro-animation component (confetti burst or pulse effect) using Framer Motion. Trigger this animation when a log entry causes today's value to meet or exceed the target. Use canvas-confetti library or pure Framer Motion keyframes."
+        },
+        {
+          "path": "frontend/src/components/LogEntryInput.tsx",
+          "operation": "modify",
+          "description": "After a log entry is submitted successfully, trigger a confirmation animation (e.g., checkmark pulse or success toast) using Framer Motion. If the entry completes the daily goal, also trigger the GoalCompletionAnimation component."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Design a cohesive visual theme with responsive navigation (bottom tab bar on mobile, left sidebar on desktop)",
+      "acceptanceCriteria": [
+        "Default Minimal theme is applied on first load",
+        "Bottom tab bar navigation is shown on narrow screens",
+        "Left sidebar navigation is shown on wide screens",
+        "Typography is bold and legible across all themes",
+        "Spacing and layout feel premium and uncluttered"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Navigation.tsx",
+          "operation": "create",
+          "description": "Create a responsive navigation component that renders a fixed bottom tab bar on mobile (width < 768px) and a left sidebar on desktop (width >= 768px). Include navigation links to Dashboard, Analytics, and Settings. Use Tailwind responsive utilities and shadcn-ui components per usage instructions."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "create",
+          "description": "Create a layout component that wraps all pages with the Navigation component and a main content area. Apply generous padding, max-width constraints, and clean card layouts for a premium feel. Ensure the layout adapts to the selected theme."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap all route components with the Layout component so the responsive navigation and cohesive layout are applied app-wide."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Set default typography to a bold sans-serif typeface (e.g., Inter or system-ui with font-weight 600-700). Define base spacing, line-height, and typographic scale for headings and body text. Ensure the Minimal theme (crisp off-white and charcoal palette) is the default."
+        },
+        {
+          "path": "frontend/public/assets/generated/logo-mark.dim_256x256.png",
+          "operation": "create",
+          "description": "Wire the generated app logo mark (circular gradient ring icon with checkmark) into the Layout component header. Reference the workspace file path frontend/public/assets/generated/logo-mark.dim_256x256.png and display it in the navigation header or sidebar."
+        },
+        {
+          "path": "frontend/public/assets/generated/onboarding-hero.dim_800x400.png",
+          "operation": "create",
+          "description": "Wire the generated onboarding hero illustration (abstract flowing lines and glowing rings) into a welcome or onboarding view if present, or display it as a hero section on the Dashboard on first visit. Reference the workspace file path frontend/public/assets/generated/onboarding-hero.dim_800x400.png."
+        },
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "operation": "modify",
+          "description": "If this is the user's first visit (no habits exist), display the onboarding hero illustration from frontend/public/assets/generated/onboarding-hero.dim_800x400.png as a hero section above the habit list, along with a welcome message and a prompt to create the first habit."
+        }
+      ]
+    }
+  ]
+}

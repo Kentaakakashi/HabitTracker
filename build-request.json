@@ -1,0 +1,200 @@
+{
+  "kind": "build_request",
+  "title": "Universal Habit Tracker App — Full Initial Build",
+  "projectName": "HabitFlow",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a Motoko backend actor that stores and manages all habit-related data: habit definitions (id, name, type, unit, icon, color, target, frequency), daily log entries (habitId, date, value, notes), user streaks (current streak, longest streak per habit), and user theme preference. Expose CRUD endpoints for habits, log entries, and theme preference. Include query functions for fetching entries by date range for analytics.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Can create, read, update, and delete habit definitions",
+        "Can log a value entry for a habit on a given date",
+        "Can retrieve all log entries for a habit within a date range",
+        "Streak data is calculated and returned per habit",
+        "User theme preference is persisted and retrievable"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement eight built-in habit log types with appropriate default units, icons, and input controls: Water (ml/oz), Calories (kcal), Exercise (minutes/reps), Weight (kg/lbs), Sleep (hours), Study (minutes), Pills (count/checkbox), and To-Dos (task list with completion toggle). Each type should have a type-specific input UI.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All eight built-in types are available when creating a new habit",
+        "Each type shows a contextually appropriate input control (slider, number input, checkbox, task list, etc.)",
+        "Default units and icons are pre-filled for each built-in type",
+        "Pills type supports checkbox-style completion",
+        "To-Dos type supports adding, completing, and removing individual tasks"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Build a custom log builder that allows users to define their own habit type with a name, unit label, icon (from a preset icon set), color, daily target value, and input type (numeric, boolean, or text). Custom habits are stored alongside built-in habits.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can open a 'Create Custom Habit' modal or page",
+        "User can set name, unit label, icon, color, target, and input type",
+        "Custom habits appear in the main habit list after creation",
+        "Custom habits can be edited and deleted"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement streak tracking for each habit: calculate current consecutive-day streak and longest-ever streak based on log entries. Display a GitHub-style contribution heatmap calendar (365 days) for each habit showing log frequency and intensity.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Current streak and longest streak are shown on each habit card",
+        "Streaks are recalculated when new entries are logged",
+        "Heatmap renders 365 days with color intensity based on entry value relative to target",
+        "Days with no entry appear as empty/muted cells",
+        "Heatmap is accessible from each habit's detail view"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add animated progress rings (circular progress indicators) to each habit card on the dashboard showing today's completion percentage relative to the daily target. Rings should animate on load and on value update.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each habit card displays a circular progress ring",
+        "Ring fill percentage reflects today's logged value vs. target",
+        "Ring animates smoothly when value changes",
+        "Ring shows 100% filled state with a distinct color when target is met",
+        "Percentage label is shown inside the ring"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Build an analytics page with charts for each habit showing: a line/bar chart of daily values over the past 30 days, a weekly average bar chart, and a goal completion rate percentage. Use a charting library such as Recharts.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Analytics page is accessible from the main navigation",
+        "User can select a habit to view its analytics",
+        "30-day daily value chart renders correctly with dates on x-axis",
+        "Weekly average chart groups data by week",
+        "Goal completion rate is displayed as a percentage stat card",
+        "Charts are responsive and readable on mobile"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Implement a full theme system with five distinct pre-built visual themes — Minimal (clean whites, soft grays), Glassmorphism (frosted glass cards, blur effects), Neon Dark (dark background, vivid neon accents), Nature (earthy greens and warm browns), and Retro (pixel-inspired, warm yellows and reds) — switchable from a settings panel. Each theme defines color palette, border radii, card styles, and typography weight.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A settings panel or theme picker allows switching between all five themes",
+        "Theme change is applied globally and immediately without page reload",
+        "Each theme has a visually distinct appearance across all components",
+        "Glassmorphism theme uses backdrop-blur and semi-transparent cards",
+        "Neon Dark theme uses dark backgrounds with glowing accent colors",
+        "Selected theme is persisted via backend and restored on next visit"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add a custom theme builder that lets users define their own theme by choosing primary color, background color, accent color, card style (flat/glass/shadow), and border radius level (none/small/large/pill). Preview the theme live before saving.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Custom theme builder is accessible from the theme settings panel",
+        "User can pick colors using a color picker for primary, background, and accent",
+        "Card style and border radius options are selectable",
+        "Live preview updates the UI as options are changed",
+        "Saved custom theme appears as a selectable option alongside built-in themes"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Integrate rich animations throughout the app using Framer Motion: page transitions, habit card enter/exit animations, progress ring draws, log entry success micro-animations (confetti or pulse effect on hitting a goal), and staggered list animations for the habit dashboard.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Page/view transitions use smooth Framer Motion animations",
+        "Habit cards animate in with staggered entry on dashboard load",
+        "Progress ring fill animates on mount and on value update",
+        "A celebratory micro-animation plays when a daily goal is completed",
+        "Log entry submission has a confirmation animation",
+        "All animations respect reduced-motion preferences"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Design and enforce a cohesive visual theme that adapts to each selected style while maintaining a premium, modern feel. The default theme (Minimal) should use a crisp off-white and charcoal palette with clean card layouts, generous spacing, and a bold sans-serif typeface. Navigation should be a fixed bottom tab bar on mobile and a left sidebar on desktop.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Default Minimal theme is applied on first load",
+        "Bottom tab bar navigation is shown on narrow screens",
+        "Left sidebar navigation is shown on wide screens",
+        "Typography is bold and legible across all themes",
+        "Spacing and layout feel premium and uncluttered"
+      ]
+    }
+  ],
+  "constraints": [
+    "All backend logic must reside in a single Motoko actor (backend/main.mo)",
+    "Do not use any external databases or cloud services",
+    "Do not edit files under frontend/src/hooks/ or frontend/src/components/ui/",
+    "Do not use blue & purple as the primary palette in any theme"
+  ],
+  "nonGoals": [
+    "User authentication via Internet Identity (no login required for this build)",
+    "Real-time notifications or push alerts",
+    "Social or sharing features",
+    "Mobile native app (web-responsive only)",
+    "Integration with external health APIs (Apple Health, Google Fit, etc.)"
+  ],
+  "imageRequirements": {
+    "required": [
+      "App logo mark — a circular gradient ring icon with a checkmark inside, modern flat style (logo-mark.dim_256x256.png)",
+      "Onboarding hero illustration — abstract flowing lines and glowing rings on a dark background suggesting progress and habit building (onboarding-hero.dim_800x400.png)"
+    ],
+    "edits": []
+  }
+}

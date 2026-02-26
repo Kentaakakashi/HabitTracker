@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Full-featured universal habit tracker app built with React + TypeScript on the Internet Computer. Features include built-in log types (water, calories, exercise, weight, sleep, study, pills, to-dos), custom log builder, streak tracking with heatmaps, progress rings, analytics charts, and a full theme system (Minimal, Glassmorphism, Neon Dark, Nature, Retro) with custom theme builder and Framer Motion animations throughout.",
+  "architectural_notes": [
+    "Built with React + TypeScript on the Internet Computer (ICP)",
+    "Framer Motion used for animations throughout the app"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- App logo mark — a circular gradient ring icon with a checkmark inside, modern flat style (logo-mark.dim_256x256.png)\n- Onboarding hero illustration — abstract flowing lines and glowing rings on a dark background suggesting progress and habit building (onboarding-hero.dim_800x400.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-eight-built-in-habit-log-types-with-appropriate-default-units-icons-and-input-controls-water-ml-oz-calories-kcal-exercise-minutes-reps-weight-kg-lbs-sleep-hours-study-minutes-pills-count-checkbox-and-to-dos-task-list-with-completion-toggle-each-type-should-have-a-type-specific-input-ui",
+      "title": "Implement eight built-in habit log types with appropriate default units, icons, and input controls: Water (ml/oz), Calories (kcal), Exercise (minutes/reps), Weight (kg/lbs), Sleep (hours), Study (minutes), Pills (count/checkbox), and To-Dos (task list with completion toggle). Each type should have a type-specific input UI.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-custom-log-builder-that-allows-users-to-define-their-own-habit-type-with-a-name-unit-label-icon-from-a-preset-icon-set-color-daily-target-value-and-input-type-numeric-boolean-or-text-custom-habits-are-stored-alongside-built-in-habits",
+      "title": "Build a custom log builder that allows users to define their own habit type with a name, unit label, icon (from a preset icon set), color, daily target value, and input type (numeric, boolean, or text). Custom habits are stored alongside built-in habits.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-streak-tracking-for-each-habit-calculate-current-consecutive-day-streak-and-longest-ever-streak-based-on-log-entries-display-a-github-style-contribution-heatmap-calendar-365-days-for-each-habit-showing-log-frequency-and-intensity",
+      "title": "Implement streak tracking for each habit: calculate current consecutive-day streak and longest-ever streak based on log entries. Display a GitHub-style contribution heatmap calendar (365 days) for each habit showing log frequency and intensity.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-animated-progress-rings-circular-progress-indicators-to-each-habit-card-on-the-dashboard-showing-today-s-completion-percentage-relative-to-the-daily-target-rings-should-animate-on-load-and-on-value-update",
+      "title": "Add animated progress rings (circular progress indicators) to each habit card on the dashboard showing today's completion percentage relative to the daily target. Rings should animate on load and on value update.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-analytics-page-with-charts-for-each-habit-showing-a-line-bar-chart-of-daily-values-over-the-past-30-days-a-weekly-average-bar-chart-and-a-goal-completion-rate-percentage-use-a-charting-library-such-as-recharts",
+      "title": "Build an analytics page with charts for each habit showing: a line/bar chart of daily values over the past 30 days, a weekly average bar chart, and a goal completion rate percentage. Use a charting library such as Recharts.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-full-theme-system-with-five-distinct-pre-built-visual-themes-minimal-clean-whites-soft-grays-glassmorphism-frosted-glass-cards-blur-effects-neon-dark-dark-background-vivid-neon-accents-nature-earthy-greens-and-warm-browns-and-retro-pixel-inspired-warm-yellows-and-reds-switchable-from-a-settings-panel-each-theme-defines-color-palette-border-radii-card-styles-and-typography-weight",
+      "title": "Implement a full theme system with five distinct pre-built visual themes — Minimal (clean whites, soft grays), Glassmorphism (frosted glass cards, blur effects), Neon Dark (dark background, vivid neon accents), Nature (earthy greens and warm browns), and Retro (pixel-inspired, warm yellows and reds) — switchable from a settings panel. Each theme defines color palette, border radii, card styles, and typography weight.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-custom-theme-builder-that-lets-users-define-their-own-theme-by-choosing-primary-color-background-color-accent-color-card-style-flat-glass-shadow-and-border-radius-level-none-small-large-pill-preview-the-theme-live-before-saving",
+      "title": "Add a custom theme builder that lets users define their own theme by choosing primary color, background color, accent color, card style (flat/glass/shadow), and border radius level (none/small/large/pill). Preview the theme live before saving.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-rich-animations-throughout-the-app-using-framer-motion-page-transitions-habit-card-enter-exit-animations-progress-ring-draws-log-entry-success-micro-animations-confetti-or-pulse-effect-on-hitting-a-goal-and-staggered-list-animations-for-the-habit-dashboard",
+      "title": "Integrate rich animations throughout the app using Framer Motion: page transitions, habit card enter/exit animations, progress ring draws, log entry success micro-animations (confetti or pulse effect on hitting a goal), and staggered list animations for the habit dashboard.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-and-enforce-a-cohesive-visual-theme-that-adapts-to-each-selected-style-while-maintaining-a-premium-modern-feel-the-default-theme-minimal-should-use-a-crisp-off-white-and-charcoal-palette-with-clean-card-layouts-generous-spacing-and-a-bold-sans-serif-typeface-navigation-should-be-a-fixed-bottom-tab-bar-on-mobile-and-a-left-sidebar-on-desktop",
+      "title": "Design and enforce a cohesive visual theme that adapts to each selected style while maintaining a premium, modern feel. The default theme (Minimal) should use a crisp off-white and charcoal palette with clean card layouts, generous spacing, and a bold sans-serif typeface. Navigation should be a fixed bottom tab bar on mobile and a left sidebar on desktop.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Built-in log types: water, calories, exercise, weight, sleep, study, pills, to-dos",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Custom log builder for user-defined habit types",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Streak tracking with heatmaps",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Progress rings for habit completion visualization",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Analytics charts for habit data over time",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Theme system with Minimal, Glassmorphism, Neon Dark, Nature, and Retro themes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Custom theme builder for user-defined themes",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Rich Framer Motion animations throughout the app",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Create a Motoko backend actor that stores and manages all habit-related data: habit definitions (id, name, type, unit, icon, color, target, frequency), daily log entries (habitId, date, value, notes), user streaks (current streak, longest streak per habit), and user theme preference. Expose CRUD endpoints for habits, log entries, and theme preference. Include query functions for fetching entries by date range for analytics.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Universal Habit Tracker",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

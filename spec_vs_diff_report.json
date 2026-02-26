@@ -1,0 +1,100 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-24T12:01:33.430Z",
+  "summary": "The diff implements a comprehensive Universal Habit Tracker app covering most requirements. The backend (backend/main.mo) handles habits, log entries, streaks, and theme persistence. The frontend includes dashboard with habit cards, circular progress, heatmap, analytics, theme system with 5 built-in themes and custom builder, animations, and responsive navigation. However, several specific acceptance criteria have gaps: Framer Motion is not evidenced (CSS animations used instead), reduced-motion preference handling is not evidenced, the onboarding hero image is not referenced, streak calculation appears frontend-only rather than backend-returned, and the CircularProgress animation uses style manipulation rather than Framer Motion.",
+  "missing_requirements": [
+    {
+      "id": "REQ-9",
+      "requirement": "Framer Motion integration for page transitions, staggered list animations, progress ring draws, and log entry success micro-animations",
+      "reason": "The diff shows CSS-based animations (animate-fade-in-up, stagger classes, confetti via plain CSS) and no import or usage of framer-motion anywhere in the visible files. REQ-9 explicitly requires Framer Motion.",
+      "evidence": [
+        "frontend/src/components/HabitCard.tsx",
+        "frontend/src/components/GoalCompletionAnimation.tsx",
+        "frontend/src/components/CircularProgress.tsx"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "requirement": "All animations respect reduced-motion preferences",
+      "reason": "No evidence of prefers-reduced-motion media query handling in any component or CSS file visible in the diff.",
+      "evidence": [
+        "frontend/src/components/HabitCard.tsx",
+        "frontend/src/components/CircularProgress.tsx"
+      ]
+    },
+    {
+      "requirement": "Onboarding hero illustration image (onboarding-hero.dim_800x400.png) referenced and displayed in the app",
+      "reason": "The diff shows the logo-mark image used in Navigation.tsx, but no reference to an onboarding hero illustration or an onboarding page/screen anywhere in the visible files.",
+      "evidence": [
+        "frontend/src/components/Navigation.tsx"
+      ]
+    },
+    {
+      "id": "REQ-1",
+      "requirement": "Streak data is calculated and returned per habit from the backend",
+      "reason": "The frontend HabitCard.tsx uses a frontend utility (calculateStreaks from utils/streakCalculator) rather than fetching streak data from the backend. Backend streak calculation and return per-habit is not evidenced in the visible truncated backend code.",
+      "evidence": [
+        "frontend/src/components/HabitCard.tsx",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "requirement": "Progress ring fill animates on mount and on value update using Framer Motion",
+      "reason": "CircularProgress uses a useEffect with direct style manipulation for the stroke offset rather than Framer Motion animate.",
+      "evidence": [
+        "frontend/src/components/CircularProgress.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity authentication integration (useInternetIdentity hook and InternetIdentityProvider with AuthClient)",
+      "reason": "The build request explicitly lists user authentication via Internet Identity as a non-goal, but the hooks/useInternetIdentity.ts file implements a full Internet Identity authentication provider with AuthClient, login, and identity management.",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    }
+  ],
+  "confidence": 0.72,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/CircularProgress.tsx",
+    "frontend/src/components/ColorPicker.tsx",
+    "frontend/src/components/CustomHabitBuilder.tsx",
+    "frontend/src/components/CustomThemeBuilder.tsx",
+    "frontend/src/components/EditHabitDialog.tsx",
+    "frontend/src/components/GoalCompletionAnimation.tsx",
+    "frontend/src/components/HabitCard.tsx",
+    "frontend/src/components/HabitTypeSelector.tsx",
+    "frontend/src/components/HeatmapCalendar.tsx",
+    "frontend/src/components/IconPicker.tsx",
+    "frontend/src/components/Layout.tsx",
+    "frontend/src/components/LogEntryInput.tsx",
+    "frontend/src/components/Navigation.tsx",
+    "frontend/src/components/ThemePicker.tsx",
+    "frontend/src/context/ThemeContext.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/Analytics.tsx",
+    "frontend/src/pages/Dashboard.tsx",
+    "frontend/src/pages/HabitDetail.tsx",
+    "frontend/src/pages/Settings.tsx",
+    "frontend/src/themes/themeDefinitions.ts",
+    "frontend/src/types/habit.ts",
+    "frontend/src/utils/analyticsCalculator.ts",
+    "frontend/src/utils/streakCalculator.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}
